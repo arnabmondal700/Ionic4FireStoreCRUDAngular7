@@ -34,16 +34,12 @@ export class ShopingCartPage implements OnInit {
       }
     );
     for (let i = 0; i < this.cartItems.length; i++) {
-      // console.log(this.cartItems);
       let parm={
         itemName: this.cartItems[i].itemName,
         itemQty: this.cartItems[i].itemNumber,
         itemPrice: this.cartItems[i].itemCost
       };
-      // console.log(parm);
-      // console.log(this.cartItems[i].id);
       await this.shopingListCRUD.updateItem(parm, this.cartItems[i].id);
-      // console.log('hello');
     }
     this.presentAlert();
   }
