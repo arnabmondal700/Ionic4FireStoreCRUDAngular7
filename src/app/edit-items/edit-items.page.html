@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Edit Item</ion-title>
+    <ion-button slot="end" icon-only (click)="navigateBack()">
+      <ion-icon name="arrow-round-back"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label position="floating">Item Name</ion-label>
+    <ion-input type="text" [(ngModel)]="shopingItem.itemName"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Number of items</ion-label>
+    <ion-input type="number" [(ngModel)]="shopingItem.itemQty"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Item Cost</ion-label>
+    <ion-input type="number" [(ngModel)]="shopingItem.itemPrice"></ion-input>
+  </ion-item>
+<ion-button expand="block" (click)="editShopingItem(shopingItem)">Edit Item Details</ion-button>
+</ion-content>

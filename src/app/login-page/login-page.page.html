@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>loginPage</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-item>
+    <ion-label position="floating">LogIn Id</ion-label>
+    <ion-input type="text" #userEmail required autofocus></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input type="password" #userPassword required></ion-input>
+  </ion-item>
+<ion-button expand="block" (click)="authService.login(userEmail.value, userPassword.value)">LOG IN</ion-button>
+</ion-content>

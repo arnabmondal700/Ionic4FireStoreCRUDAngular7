@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>shopingCart</ion-title>
+    <ion-button slot="end" icon-only (click)="navigateBack()">
+        <ion-icon name="arrow-round-back"></ion-icon>
+      </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item *ngFor="let item of cartItems">
+      {{item.itemName}}
+      <div slot="end">
+          QTY:{{item.itemNumber}}
+      </div>
+      <div slot="end">
+          Total: {{item.itemCost*item.itemNumber}}Rs.
+      </div>
+    </ion-item>
+  </ion-list>
+  <ion-button expand="block" (click)="checkOutItems()">Check Out</ion-button>
+</ion-content>
