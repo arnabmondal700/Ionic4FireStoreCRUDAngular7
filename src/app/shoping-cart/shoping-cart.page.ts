@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartItemService } from '../cart-item.service';
 import { ShopingCrudService } from '../shoping-crud.service';
 import { AlertController } from '@ionic/angular';
+import { ShopingItem } from './../shoping-item';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class ShopingCartPage implements OnInit {
 
   constructor(private router: Router, private cartItemList: CartItemService, private shopingListCRUD: ShopingCrudService, private addCartItem: ShopingCrudService, public alertCtrl: AlertController) { }
-  cartItems: any[] = [];
+  cartItems: ShopingItem[] = [];
   ngOnInit() {
     console.log(this.cartItemList.get());
     this.cartItems = this.cartItemList.get();
@@ -34,11 +35,13 @@ export class ShopingCartPage implements OnInit {
       }
     );
     for (let i = 0; i < this.cartItems.length; i++) {
-      let parm={
+      // let itemleft: number = this.cartItems[i].itemInStore - this.cartItems[i].itemNumber;
+      let parm = {
         itemName: this.cartItems[i].itemName,
-        itemQty: this.cartItems[i].itemNumber,
+        itemQty: this.cartItems[i].itemInStore - this.cartItems[i].itemNumber,
         itemPrice: this.cartItems[i].itemCost
       };
+      console.log(parm);
       await this.shopingListCRUD.updateItem(parm, this.cartItems[i].id);
     }
     this.presentAlert();

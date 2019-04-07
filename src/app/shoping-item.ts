@@ -3,5 +3,6 @@ export interface ShopingItem {
     itemName: string;
     itemNumber: number;
     itemCost: number;
+    itemInStore: number;
 }
 

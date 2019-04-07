@@ -1,68 +1,68 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Shoping List</ion-title>
-    <ng-container *ngIf="userType=='Admin'; then Admin; else User"></ng-container>
-    <ng-template #Admin>
-      <ion-button slot="end" icon-only (click)="addToCart()">
-        <ion-icon name="add"></ion-icon>
-      </ion-button>
-    </ng-template>
-    <ng-template #User>
-      <ion-button slot="end" icon-only (click)="checkOut()">
-        <ion-icon name="cart"></ion-icon>
-      </ion-button>
-    </ng-template>
+    <ion-toolbar color="primary">
+        <ion-title>Shoping List</ion-title>
+        <ng-container *ngIf="userType=='Admin'; then Admin; else User"></ng-container>
+        <ng-template #Admin>
+            <ion-button slot="end" icon-only (click)="addToCart()">
+                <ion-icon name="add"></ion-icon>
+            </ion-button>
+        </ng-template>
+        <ng-template #User>
+            <ion-button slot="end" icon-only (click)="checkOut()">
+                <ion-icon name="cart"></ion-icon>
+            </ion-button>
+        </ng-template>
 
-    <ion-button slot="end" *ngIf="authService.isLoggedIn" (click)="authService.logout()">
-      LOG OUT
-    </ion-button>
-  </ion-toolbar>
+        <ion-button slot="end" *ngIf="authService.isLoggedIn" (click)="authService.logout()">
+            LOG OUT
+        </ion-button>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-list >
-    <ng-container *ngIf="userType=='Admin'; then thenTemplate; else elseTemplate"></ng-container>
-    <ng-template #thenTemplate>
-      <ion-item *ngFor="let item of items">
-        {{ item.payload.doc._document.proto.fields.itemName.stringValue }}
-        <div slot="end"> {{ item.payload.doc._document.proto.fields.itemQty.integerValue }}</div>
-        <ion-button slot="end" (click)="deleteItem(item.payload.doc.id)">
-          <ion-icon name="trash"></ion-icon>
-        </ion-button>
-        <ion-button slot="end" (click)="navigateToEdit(item.payload.doc.id,item.payload.doc._document.proto.fields.itemName.stringValue,item.payload.doc._document.proto.fields.itemPrice.integerValue,item.payload.doc._document.proto.fields.itemNumber.integerValue)">
-          <ion-icon name="create"></ion-icon>
-        </ion-button>
-      </ion-item>
-    </ng-template>
-    <ng-template #elseTemplate>
-      <ion-item *ngFor="let item of items; let i = index">
-        <ion-card-content>
-          <ion-card-content>
-            {{ item.payload.doc._document.proto.fields.itemName.stringValue }}
-          </ion-card-content>
-          <ng-container *ngIf="addButtonClicked[i] ; then addContent; else noOfItem"></ng-container>
-          <ng-template #addContent slot="end">
-            <ion-button slot="end" (click)="itemAdded(i)">Add</ion-button>
-          </ng-template>
-          <ng-template #noOfItem slot="end">
-            <ion-card-content slot="end">
-              <ion-button shape="round" size="small" (click)="addMoreCartItem(i)">
-                <ion-icon name="add-circle-outline"></ion-icon>
-              </ion-button>
-              QTY:{{itemQty[i]}}
-              <ion-button shape="round" size="small" (click)="removeCartItem(i)">
-                <ion-icon name="remove-circle-outline"></ion-icon>
-              </ion-button>
+    <ion-list>
+        <ng-container *ngIf="userType=='Admin'; then AdminTemplate; else UserTemplate"></ng-container>
+        <ng-template #AdminTemplate>
+            <ion-item *ngFor="let item of items">
+                {{ item.payload.doc._document.proto.fields.itemName.stringValue }}
+                <div slot="end"> {{ item.payload.doc._document.proto.fields.itemQty.integerValue }}</div>
+                <ion-button slot="end" (click)="deleteItem(item.payload.doc.id)">
+                    <ion-icon name="trash"></ion-icon>
+                </ion-button>
+                <ion-button slot="end" (click)="navigateToEdit(item.payload.doc.id,item.payload.doc._document.proto.fields.itemName.stringValue,item.payload.doc._document.proto.fields.itemPrice.integerValue,item.payload.doc._document.proto.fields.itemQty.integerValue)">
+                    <ion-icon name="create"></ion-icon>
+                </ion-button>
+            </ion-item>
+        </ng-template>
+        <ng-template #UserTemplate>
+            <ion-item *ngFor="let item of items; let i = index">
+                <ion-card-content>
+                    <ion-card-content>
+                        {{ item.payload.doc._document.proto.fields.itemName.stringValue }}
+                    </ion-card-content>
+                    <ng-container *ngIf="addButtonClicked[i] ; then addContent; else noOfItem"></ng-container>
+                    <ng-template #addContent slot="end">
+                        <ion-button slot="end" (click)="itemAdded(i)">Add</ion-button>
+                    </ng-template>
+                    <ng-template #noOfItem slot="end">
+                        <ion-card-content slot="end">
+                            <ion-button shape="round" size="small" (click)="addMoreCartItem(i)">
+                                <ion-icon name="add-circle-outline"></ion-icon>
+                            </ion-button>
+                            QTY:{{itemQty[i]}}
+                            <ion-button shape="round" size="small" (click)="removeCartItem(i)">
+                                <ion-icon name="remove-circle-outline"></ion-icon>
+                            </ion-button>
 
-            </ion-card-content>
-          </ng-template>
-        </ion-card-content>
+                        </ion-card-content>
+                    </ng-template>
+                </ion-card-content>
 
 
-        <ion-card-content slot="end">Price: {{ item.payload.doc._document.proto.fields.itemPrice.integerValue }} Rs.
-        </ion-card-content>
-      </ion-item>
-    </ng-template>
+                <ion-card-content slot="end">Price: {{ item.payload.doc._document.proto.fields.itemPrice.integerValue }} Rs.
+                </ion-card-content>
+            </ion-item>
+        </ng-template>
 
-  </ion-list>
+    </ion-list>
 </ion-content>

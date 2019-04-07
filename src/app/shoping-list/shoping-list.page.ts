@@ -59,11 +59,12 @@ export class ShopingListPage implements OnInit, OnDestroy {
     this.selectedItems = [];
     for (let i = 0; i < this.itemQty.length; i++) {
       if (this.itemQty[i] > 0) {
-        let obj:ShopingItem = {
+        let obj: ShopingItem = {
           id: this.items[i].payload.doc.id,
           itemName: this.items[i].payload.doc._document.proto.fields.itemName.stringValue,
           itemNumber: this.itemQty[i],
-          itemCost: this.items[i].payload.doc._document.proto.fields.itemPrice.integerValue
+          itemCost: this.items[i].payload.doc._document.proto.fields.itemPrice.integerValue,
+          itemInStore: Number(this.items[i].payload.doc._document.proto.fields.itemQty.integerValue)
         };
         this.selectedItems.push(obj);
       }

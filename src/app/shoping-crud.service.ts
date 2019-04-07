@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-// import { ShopingItem } from './shoping-item';
 import { CartItems } from './cart-items';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { from } from 'rxjs';
@@ -75,7 +74,8 @@ export class ShopingCrudService {
   updateItem(itemObj: CartItems, itemName: string): void {
     this.firestore.collection('cart').doc(itemName).update({
       itemName: itemObj.itemName,
-      itemNumber: itemObj.itemQty
+      itemPrice: itemObj.itemPrice,
+      itemQty: itemObj.itemQty
     }).then(res => {
       this.items.subscribe(res => this.refresh(res));
     });

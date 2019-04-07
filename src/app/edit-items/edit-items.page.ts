@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { ShopingItem } from '../shoping-item';
 import { CartItems } from '../cart-items';
 import { ShopingCrudService } from '../shoping-crud.service';
 import { AlertController } from '@ionic/angular';
