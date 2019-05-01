@@ -24,12 +24,12 @@
         <ng-container *ngIf="userType=='Admin'; then AdminTemplate; else UserTemplate"></ng-container>
         <ng-template #AdminTemplate>
             <ion-item *ngFor="let item of items">
-                {{ item.payload.doc._document.proto.fields.itemName.stringValue }}
-                <div slot="end"> {{ item.payload.doc._document.proto.fields.itemQty.integerValue }}</div>
+                {{ item.payload.doc._document.proto?.fields.itemName.stringValue }}
+                <div slot="end"> {{ item.payload.doc._document.proto?.fields.itemQty.integerValue }}</div>
                 <ion-button slot="end" (click)="deleteItem(item.payload.doc.id)">
                     <ion-icon name="trash"></ion-icon>
                 </ion-button>
-                <ion-button slot="end" (click)="navigateToEdit(item.payload.doc.id,item.payload.doc._document.proto.fields.itemName.stringValue,item.payload.doc._document.proto.fields.itemPrice.integerValue,item.payload.doc._document.proto.fields.itemQty.integerValue)">
+                <ion-button slot="end" (click)="navigateToEdit(item.payload.doc.id,item.payload.doc._document.proto?.fields.itemName.stringValue,item.payload.doc._document.proto?.fields.itemPrice.integerValue,item.payload.doc._document.proto?.fields.itemQty.integerValue)">
                     <ion-icon name="create"></ion-icon>
                 </ion-button>
             </ion-item>
@@ -38,7 +38,7 @@
             <ion-item *ngFor="let item of items; let i = index">
                 <ion-card-content>
                     <ion-card-content>
-                        {{ item.payload.doc._document.proto.fields.itemName.stringValue }}
+                        {{ item.payload.doc._document.proto?.fields.itemName.stringValue }}
                     </ion-card-content>
                     <ng-container *ngIf="addButtonClicked[i] ; then addContent; else noOfItem"></ng-container>
                     <ng-template #addContent slot="end">
@@ -59,7 +59,7 @@
                 </ion-card-content>
 
 
-                <ion-card-content slot="end">Price: {{ item.payload.doc._document.proto.fields.itemPrice.integerValue }} Rs.
+                <ion-card-content slot="end">Price: {{ item.payload.doc._document.proto?.fields.itemPrice.integerValue }} Rs.
                 </ion-card-content>
             </ion-item>
         </ng-template>

@@ -62,8 +62,8 @@ export class ShopingListPage implements OnInit, OnDestroy {
         let obj: ShopingItem = {
           id: this.items[i].payload.doc.id,
           itemName: this.items[i].payload.doc._document.proto.fields.itemName.stringValue,
-          itemNumber: this.itemQty[i],
-          itemCost: this.items[i].payload.doc._document.proto.fields.itemPrice.integerValue,
+          itemNumber: Number(this.itemQty[i]),
+          itemCost: Number(this.items[i].payload.doc._document.proto.fields.itemPrice.integerValue),
           itemInStore: Number(this.items[i].payload.doc._document.proto.fields.itemQty.integerValue)
         };
         this.selectedItems.push(obj);
@@ -105,6 +105,7 @@ export class ShopingListPage implements OnInit, OnDestroy {
         this.itemQty[i] = 0;
       }
     }
+    console.log(this.items);
   }
   addToCart(): void {
     this.router.navigate(['/add-shoping']);

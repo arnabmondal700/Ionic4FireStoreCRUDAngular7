@@ -72,10 +72,11 @@ export class ShopingCrudService {
   }
 
   updateItem(itemObj: CartItems, itemName: string): void {
+    // console.log(itemObj);
     this.firestore.collection('cart').doc(itemName).update({
       itemName: itemObj.itemName,
-      itemPrice: itemObj.itemPrice,
-      itemQty: itemObj.itemQty
+      itemPrice: Number(itemObj.itemPrice),
+      itemQty: Number(itemObj.itemQty)
     }).then(res => {
       this.items.subscribe(res => this.refresh(res));
     });
